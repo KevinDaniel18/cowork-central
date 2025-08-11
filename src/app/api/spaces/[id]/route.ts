@@ -4,10 +4,12 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
+  const { id } = context.params;
+
   try {
-    const spaceId = parseInt(params.id);
+    const spaceId = parseInt(id);
 
     if (isNaN(spaceId)) {
       return NextResponse.json({ error: "ID invalid" }, { status: 400 });
@@ -29,29 +31,20 @@ export async function GET(
         updatedAt: true,
         bookings: {
           where: {
-            status: {
-              in: ["CONFIRMED", "PENDING"],
-            },
-            startTime: {
-              gte: new Date(),
-            },
+            status: { in: ["CONFIRMED", "PENDING"] },
+            startTime: { gte: new Date() },
           },
           select: {
             startTime: true,
             endTime: true,
             status: true,
           },
-          orderBy: {
-            startTime: "asc",
-          },
+          orderBy: { startTime: "asc" },
         },
-
         _count: {
           select: {
             bookings: {
-              where: {
-                status: "COMPLETED",
-              },
+              where: { status: "COMPLETED" },
             },
           },
         },
@@ -70,8 +63,6 @@ export async function GET(
       priceHour: parseFloat(space.priceHour.toString()),
       totalBookings: space._count.bookings,
       upcomingBookings: space.bookings.length,
-      _count: undefined,
-      bookings: undefined,
     };
 
     return NextResponse.json({
