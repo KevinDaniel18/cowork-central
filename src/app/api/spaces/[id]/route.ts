@@ -3,7 +3,7 @@ import { requireAdminWithParams } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest, context: any) {
-  const { id } = context.id
+  const { id } = context.id;
   try {
     const spaceId = parseInt(id);
     if (isNaN(spaceId)) {
@@ -87,14 +87,10 @@ export async function GET(request: NextRequest, context: any) {
 }
 
 export const PUT = requireAdminWithParams(
-  async (
-    request: NextRequest,
-    user,
-    { params }: { params: { id: string } }
-  ) => {
+  async (request: NextRequest, user: any, context: any) => {
+    const { id } = context.params;
     try {
-      const spaceId = parseInt(params.id);
-
+      const spaceId = parseInt(id);
       if (isNaN(spaceId)) {
         return new Response(JSON.stringify({ error: "ID invalid" }), {
           status: 400,
