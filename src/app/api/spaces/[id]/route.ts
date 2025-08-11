@@ -3,7 +3,7 @@ import { requireAdminWithParams } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest, context: any) {
-  const { id } = context.id;
+  const { id } = context.id
   try {
     const spaceId = parseInt(id);
     if (isNaN(spaceId)) {
