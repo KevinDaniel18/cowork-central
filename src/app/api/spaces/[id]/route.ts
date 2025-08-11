@@ -2,10 +2,13 @@ import { prisma } from "@/constants/modules";
 import { requireAdminWithParams } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(
-  request: NextRequest,
-  context: { params: { id: string } }
-) {
+type Context = {
+  params: {
+    id: string;
+  };
+};
+
+export async function GET(request: NextRequest, context: Context) {
   const { id } = context.params;
   try {
     const spaceId = parseInt(id);
