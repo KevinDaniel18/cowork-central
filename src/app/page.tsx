@@ -57,8 +57,8 @@ export default function LandingPage() {
           style={{ color: colors.brand.secondary[600] }}
         />
       ),
-      Title: "Secure Payments",
-      Description: "Process payments securely with bank-grade encryption",
+      title: "Secure Payments",
+      description: "Process payments securely with bank-grade encryption",
     },
     {
       icon: (
@@ -67,8 +67,8 @@ export default function LandingPage() {
           style={{ color: colors.brand.accent[500] }}
         />
       ),
-      Title: "Advanced Analytics",
-      Description:
+      title: "Advanced Analytics",
+      description:
         "Complete dashboard with metrics and reports for administrators",
     },
     {
@@ -78,8 +78,8 @@ export default function LandingPage() {
           style={{ color: colors.brand.secondary[600] }}
         />
       ),
-      Title: "Multiple Locations",
-      Description:
+      title: "Multiple Locations",
+      description:
         "Manage spaces in different locations from a single dashboard",
     },
   ];
