@@ -4,7 +4,7 @@ export async function POST(request: NextRequest) {
   try {
     const res = NextResponse.json({
       success: true,
-      message: "Logout exitoso",
+      message: "Logout successfully",
     });
 
     res.cookies.set("auth-token", "", {
@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error("Error en logout:", error);
     return NextResponse.json(
-      { error: "Error interno del servidor" },
+      { error: "Internal server error" },
       { status: 500 }
     );
   }

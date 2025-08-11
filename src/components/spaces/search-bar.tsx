@@ -15,7 +15,7 @@ export default function SearchBar({ filters, setFilters }: any) {
   return (
     <Input
       id="q"
-      placeholder="Buscar por nombre o descripción..."
+      placeholder="Search by name or description..."
       value={searchTerm}
       onChange={(e) => setSearchTerm(e.target.value)}
       className="pl-3"

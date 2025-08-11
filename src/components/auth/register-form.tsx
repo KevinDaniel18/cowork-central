@@ -48,10 +48,12 @@ export function RegisterForm() {
       if (result?.success) {
         router.replace("/auth/login");
       } else {
-        setError(result?.error ?? "No pudimos registrar tu cuenta");
+        setError(result?.error ?? "We couldn't register your account");
       }
     } catch {
-      setError("Hubo un problema registrando tu cuenta. Intenta nuevamente.");
+      setError(
+        "There was a problem registering your account. Please try again."
+      );
     } finally {
       setIsLoading(false);
     }
@@ -69,13 +71,13 @@ export function RegisterForm() {
           className="text-2xl"
           style={{ color: colors.foreground.light }}
         >
-          Crea tu cuenta
+          Create your account
         </CardTitle>
         <CardDescription
           className="text-sm"
           style={{ color: colors.neutral[500] }}
         >
-          Empieza a gestionar tus reservas de espacios
+          Start managing your space reservations
         </CardDescription>
       </CardHeader>
 
@@ -99,14 +101,14 @@ export function RegisterForm() {
 
         <form onSubmit={onSubmit} className="grid gap-4">
           <div className="grid gap-2">
-            <Label htmlFor="name">Nombre</Label>
+            <Label htmlFor="name">Name</Label>
             <div className="relative">
               <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground opacity-70" />
               <Input
                 id="name"
                 name="name"
                 type="text"
-                placeholder="Tu nombre"
+                placeholder="Your name"
                 required
                 value={data.name}
                 onChange={onChange("name")}
@@ -144,7 +146,7 @@ export function RegisterForm() {
           </div>
 
           <div className="grid gap-2">
-            <Label htmlFor="password">Contraseña</Label>
+            <Label htmlFor="password">Password</Label>
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground opacity-70" />
               <Input
@@ -152,7 +154,7 @@ export function RegisterForm() {
                 name="password"
                 type={showPassword ? "text" : "password"}
                 autoComplete="new-password"
-                placeholder="Mínimo 8 caracteres"
+                placeholder="Minimum 8 characters"
                 required
                 value={data.password}
                 onChange={onChange("password")}
@@ -166,9 +168,7 @@ export function RegisterForm() {
               />
               <button
                 type="button"
-                aria-label={
-                  showPassword ? "Ocultar contraseña" : "Mostrar contraseña"
-                }
+                aria-label={showPassword ? "Hide Password" : "Show Password"}
                 onClick={() => setShowPassword((s) => !s)}
                 className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-md hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#10b981]"
               >
@@ -193,7 +193,7 @@ export function RegisterForm() {
             />
             {passwordWeak && (
               <p className="text-xs" style={{ color: "#7f1d1d" }}>
-                La contraseña debe tener al menos 8 caracteres.
+                The password must be at least 8 characters.
               </p>
             )}
           </div>
@@ -205,19 +205,19 @@ export function RegisterForm() {
             style={{ backgroundColor: colors.brand.primary[500] }}
           >
             <UserPlus className="h-4 w-4" />
-            {isLoading ? "Creando cuenta..." : "Crear cuenta"}
+            {isLoading ? "Creating account..." : "Create account"}
           </Button>
         </form>
       </CardContent>
 
       <CardFooter className="flex justify-center text-sm">
-        <span className="text-muted-foreground">¿Ya tienes cuenta?</span>
+        <span className="text-muted-foreground">Already have an account?</span>
         <Link
           href="/auth/login"
           className="ml-2 font-medium underline underline-offset-4"
           style={{ color: colors.brand.accent[500] }}
         >
-          Inicia sesión
+          Register
         </Link>
       </CardFooter>
     </Card>

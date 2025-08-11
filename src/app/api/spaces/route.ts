@@ -70,7 +70,7 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error("Error fetching spaces", error);
     return NextResponse.json(
-      { error: "Error interno del servidor" },
+      { error: "Internal Server Error" },
       { status: 500 }
     );
   } finally {
@@ -93,7 +93,7 @@ export const POST = requireAdmin(async (request: NextRequest, user) => {
     if (!name || !type || !capacity || !priceHour) {
       return new Response(
         JSON.stringify({
-          error: "Campos requeridos: name, type, capacity, priceHour",
+          error: "Required fields: name, type, capacity, priceHour",
         }),
         {
           status: 400,
@@ -106,7 +106,7 @@ export const POST = requireAdmin(async (request: NextRequest, user) => {
     if (!validTypes.includes(type)) {
       return new Response(
         JSON.stringify({
-          error: `Tipo inválido. Debe ser uno de: ${validTypes.join(", ")}`,
+          error: `Invalid type. Must be one of: ${validTypes.join(", ")}`,
         }),
         {
           status: 400,
@@ -117,7 +117,7 @@ export const POST = requireAdmin(async (request: NextRequest, user) => {
 
     if (capacity < 1 || priceHour <= 0) {
       return new Response(
-        JSON.stringify({ error: "Capacidad debe ser >= 1 y precio > 0" }),
+        JSON.stringify({ error: "Capacity must be >= 1 and price > 0" }),
         {
           status: 400,
           headers: { "Content-Type": "application/json" },

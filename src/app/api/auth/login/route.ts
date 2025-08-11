@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
     const { email, password } = await request.json();
     if (!email || !password) {
       return NextResponse.json(
-        { error: "Email y contraseña son requeridos" },
+        { error: "Email and password are required" },
         { status: 400 }
       );
     }
@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
 
     if (!user) {
       return NextResponse.json(
-        { error: "Credenciales inválidas" },
+        { error: "Invalid credentials" },
         { status: 401 }
       );
     }
@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
 
     if (!isPasswordValid) {
       return NextResponse.json(
-        { error: "Credenciales incorrectas" },
+        { error: "Invalid credentials" },
         { status: 401 }
       );
     }
@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
     const response = NextResponse.json({
       success: true,
       user: userWithoutPassword,
-      message: "Login exitoso",
+      message: "Login successful",
     });
 
     response.cookies.set("auth-token", token, {
@@ -60,9 +60,9 @@ export async function POST(request: NextRequest) {
 
     return response;
   } catch (error) {
-    console.error("Error en login:", error);
+    console.error("Error login:", error);
     return NextResponse.json(
-      { error: "Error interno del servidor" },
+      { error: "Internal server error" },
       { status: 500 }
     );
   } finally {

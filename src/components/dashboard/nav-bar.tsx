@@ -48,19 +48,19 @@ export default function NavBar({
               href="#features"
               className="text-gray-600 hover:text-emerald-600 transition-colors"
             >
-              Características
+              Features
             </a>
             <a
               href="#spaces"
               className="text-gray-600 hover:text-emerald-600 transition-colors"
             >
-              Espacios
+              Espaces
             </a>
             <a
               href="#pricing"
               className="text-gray-600 hover:text-emerald-600 transition-colors"
             >
-              Precios
+              Prices
             </a>
           </div>
 
@@ -85,14 +85,14 @@ export default function NavBar({
                     href="/auth/login"
                     className="text-sm sm:text-base text-gray-600 hover:text-emerald-600 transition-colors"
                   >
-                    Iniciar Sesión
+                    Login
                   </Link>
                   <Link
                     href="/auth/register"
                     className="text-white px-4 py-2 rounded-lg transition-colors"
                     style={{ backgroundColor: colors.brand.primary[600] }}
                   >
-                    Registrarse
+                    Register
                   </Link>
                 </>
               )}
@@ -105,7 +105,7 @@ export default function NavBar({
               onClick={() => setMenuOpen((v) => !v)}
               aria-expanded={menuOpen}
               aria-controls="mobile-menu"
-              aria-label="Abrir menú"
+              aria-label="Open menu"
             >
               {menuOpen ? (
                 <ChevronUp className="w-5 h-5" />
@@ -133,27 +133,27 @@ export default function NavBar({
                 onClick={() => setMenuOpen(false)}
                 className="block text-gray-700 hover:text-emerald-600 transition-colors"
               >
-                Características
+                Features
               </a>
               <a
                 href="#spaces"
                 onClick={() => setMenuOpen(false)}
                 className="block text-gray-700 hover:text-emerald-600 transition-colors"
               >
-                Espacios
+                Espaces
               </a>
               <a
                 href="#pricing"
                 onClick={() => setMenuOpen(false)}
                 className="block text-gray-700 hover:text-emerald-600 transition-colors"
               >
-                Precios
+                Prices
               </a>
 
               {user ? (
                 <div className="pt-3 space-y-2">
                   <p className="text-sm" style={{ color: colors.neutral[600] }}>
-                    Hola,{" "}
+                    Hello,{" "}
                     <span
                       className="font-medium"
                       style={{ color: colors.foreground.light }}
@@ -175,14 +175,14 @@ export default function NavBar({
                     href="/auth/login"
                     className="block text-sm text-gray-700 hover:text-emerald-600 transition-colors"
                   >
-                    Iniciar Sesión
+                    Login
                   </Link>
                   <Link
                     href="/auth/register"
                     className="w-full inline-flex justify-center px-4 py-2 rounded-lg text-white transition-colors"
                     style={{ backgroundColor: colors.brand.primary[600] }}
                   >
-                    Registrarse
+                    Register
                   </Link>
                 </div>
               )}

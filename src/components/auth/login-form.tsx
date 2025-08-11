@@ -47,14 +47,14 @@ export function LoginForm() {
       if (result?.success) {
         router.replace("/");
       } else {
-        setError(result?.error ?? "Credenciales inválidas");
+        setError(result?.error ?? "Invalid credentials");
       }
     } catch (error: any) {
       // console.log(error);
 
       setError(
         error?.response?.data?.error ??
-          "No pudimos iniciar sesíon. Intenta nuevamente"
+          "We couldn't log you in. Please try again."
       );
     } finally {
       setIsLoading(false);
@@ -71,13 +71,13 @@ export function LoginForm() {
           className="text-2xl"
           style={{ color: colors.foreground.light }}
         >
-          Inicia sesión
+          Sign in
         </CardTitle>
         <CardDescription
           className="text-sm"
           style={{ color: colors.neutral[500] }}
         >
-          Administra tus reservas de coworking
+          Manage your coworking reservations
         </CardDescription>
       </CardHeader>
 
@@ -109,7 +109,7 @@ export function LoginForm() {
                 name="email"
                 type="email"
                 autoComplete="email"
-                placeholder="tucorreo@empresa.com"
+                placeholder="yourmail@company.com"
                 required
                 value={data.email}
                 onChange={handleInput}
@@ -124,7 +124,7 @@ export function LoginForm() {
           </div>
 
           <div className="grid gap-2">
-            <Label htmlFor="password">Contraseña</Label>
+            <Label htmlFor="password">Password</Label>
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground opacity-70" />
               <Input
@@ -145,9 +145,7 @@ export function LoginForm() {
               />
               <button
                 type="button"
-                aria-label={
-                  showPassword ? "Ocultar contraseña" : "Mostrar contraseña"
-                }
+                aria-label={showPassword ? "Hide Password" : "Show Password"}
                 onClick={() => setShowPassword((s) => !s)}
                 className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-md hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#10b981]"
               >
@@ -167,14 +165,14 @@ export function LoginForm() {
                 className="h-4 w-4 rounded border"
                 style={{ borderColor: colors.border.light }}
               />
-              <span className="text-muted-foreground">Recordarme</span>
+              <span className="text-muted-foreground">Remember me</span>
             </label>
             <Link
               href="/auth/forgot"
               className="underline underline-offset-4"
               style={{ color: colors.brand.secondary[600] }}
             >
-              ¿Olvidaste tu contraseña?
+              Forgot your password?
             </Link>
           </div>
 
@@ -187,19 +185,19 @@ export function LoginForm() {
             }}
           >
             <LogIn className="h-4 w-4" />
-            {isLoading ? "Ingresando..." : "Entrar"}
+            {isLoading ? "Entering..." : "Login"}
           </Button>
         </form>
       </CardContent>
 
       <CardFooter className="flex justify-center text-sm">
-        <span className="text-muted-foreground">¿No tienes Cuenta?</span>
+        <span className="text-muted-foreground">Don't have an account?</span>
         <Link
           href="/auth/register"
           className="ml-2 font-medium underline underline-offset-4"
           style={{ color: colors.brand.accent[500] }}
         >
-          Crear cuenta
+          Login
         </Link>
       </CardFooter>
     </Card>

@@ -21,16 +21,16 @@ export default function RegisterPage() {
               color: "#ffffff",
             }}
           >
-            Coworking Reservas
+            Coworking Reservations
           </div>
           <h1
             className="mt-3 text-2xl font-semibold"
             style={{ color: colors.foreground.light }}
           >
-            Únete a la plataforma
+            Join the platform
           </h1>
           <p className="text-sm" style={{ color: colors.neutral[500] }}>
-            Regístrate para empezar a reservar espacios
+            Sign up to start booking spaces
           </p>
         </div>
 
@@ -40,7 +40,7 @@ export default function RegisterPage() {
           className="mt-6 text-center text-xs"
           style={{ color: colors.neutral[500] }}
         >
-          Al registrarte aceptas nuestros Términos y Política de Privacidad
+          By registering you agree to our Terms and Privacy Policy{" "}
         </p>
       </div>
     </div>

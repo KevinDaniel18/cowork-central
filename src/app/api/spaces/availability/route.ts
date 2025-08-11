@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
 
     if (!date) {
       return NextResponse.json(
-        { error: "Parámetro date es requerido (formato: YYYY-MM-DD)" },
+        { error: "Parameter date is required (format: YYYY-MM-DD)" },
         { status: 400 }
       );
     }
@@ -19,21 +19,21 @@ export async function GET(request: NextRequest) {
     const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
     if (!dateRegex.test(date)) {
       return NextResponse.json(
-        { error: "Formato de fecha inválido. Use YYYY-MM-DD" },
+        { error: "Invalid date format. Use YYYY-MM-DD" },
         { status: 400 }
       );
     }
 
     const requestedDate = new Date(date);
     if (isNaN(requestedDate.getTime())) {
-      return NextResponse.json({ error: "Fecha inválida" }, { status: 400 });
+      return NextResponse.json({ error: "Invalid Date" }, { status: 400 });
     }
 
     if (spaceIdParam) {
       const spaceId = parseInt(spaceIdParam);
       if (isNaN(spaceId)) {
         return NextResponse.json(
-          { error: "spaceId debe ser un número" },
+          { error: "spaceId must be a number" },
           { status: 400 }
         );
       }
@@ -44,7 +44,7 @@ export async function GET(request: NextRequest) {
 
       if (!space) {
         return NextResponse.json(
-          { error: "Espacio no encontrado o no está activo" },
+          { error: "Space not found or not active" },
           { status: 404 }
         );
       }
@@ -55,14 +55,14 @@ export async function GET(request: NextRequest) {
 
         if (isNaN(startDateTime.getTime()) || isNaN(endDateTime.getTime())) {
           return NextResponse.json(
-            { error: "Formato de hora inválido. Use HH:MM" },
+            { error: "Invalid time format. Use HH:MM" },
             { status: 400 }
           );
         }
 
         if (startDateTime >= endDateTime) {
           return NextResponse.json(
-            { error: "La hora de inicio debe ser anterior a la hora de fin" },
+            { error: "Start time must be before end time" },
             { status: 400 }
           );
         }
@@ -233,8 +233,8 @@ export async function GET(request: NextRequest) {
       })),
       availableSlots:
         space.bookings.length === 0
-          ? "Todo el día disponible"
-          : `${space.bookings.length} reservas`,
+          ? "All day available"
+          : `${space.bookings.length} reservations`,
     }));
 
     return NextResponse.json({
@@ -246,7 +246,7 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error("Error checking availability:", error);
     return NextResponse.json(
-      { error: "Error interno del servidor" },
+      { error: "Internal server error" },
       { status: 500 }
     );
   } finally {

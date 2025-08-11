@@ -18,16 +18,16 @@ export default function LoginPage() {
             className="inline-flex h-11 items-center justify-center rounded-full px-4 text-sm font-medium"
             style={{ background: colors.gradients.brand, color: "#ffffff" }}
           >
-            Coworking Reservas
+            Coworking Reservations
           </div>
           <h1
             className="mt-3 text-2xl font-medium"
             style={{ color: colors.foreground.light }}
           >
-            Bienvenido de vuelta
+            Welcome back
           </h1>
           <p className="text-sm" style={{ color: colors.neutral[500] }}>
-            Ingresa tus credenciales para continuar
+            Enter your credentials to continue
           </p>
         </div>
 
@@ -37,7 +37,7 @@ export default function LoginPage() {
           className="mt-6 text-center text-xs"
           style={{ color: colors.neutral[500] }}
         >
-          Al continuar aceptas nuestros Términos y Políticas de Privacidad
+          By continuing you agree to our Terms and Privacy Policy
         </p>
       </div>
     </div>

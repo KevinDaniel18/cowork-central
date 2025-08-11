@@ -149,9 +149,7 @@ export default function Dashboard() {
               </div>
               <div>
                 <h1 className="text-xl font-bold text-gray-900">Dashboard</h1>
-                <p className="text-sm text-gray-500">
-                  Bienvenido, {user?.name}
-                </p>
+                <p className="text-sm text-gray-500">Welcome, {user?.name}</p>
               </div>
             </div>
             <div className="flex items-center space-x-4">
@@ -160,7 +158,7 @@ export default function Dashboard() {
                 className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors"
               >
                 <LogOut className="w-4 h-4" />
-                <span>Salir</span>
+                <span>Exit</span>
               </button>
             </div>
           </div>
@@ -207,7 +205,7 @@ export default function Dashboard() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600">
-                      Total Espacios
+                      Total Spaces
                     </p>
                     <p className="text-2xl font-bold text-gray-900">
                       {stats.totalSpaces}
@@ -229,7 +227,7 @@ export default function Dashboard() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600">
-                      Reservas Totales
+                      Total Reservations
                     </p>
                     <p className="text-2xl font-bold text-gray-900">
                       {stats.totalBookings}
@@ -251,7 +249,7 @@ export default function Dashboard() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600">
-                      Completadas
+                      Completed
                     </p>
                     <p className="text-2xl font-bold text-gray-900">
                       {stats.completedBookings}
@@ -272,9 +270,7 @@ export default function Dashboard() {
               <div className="bg-white rounded-lg p-6 shadow-sm">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-600">
-                      Ingresos
-                    </p>
+                    <p className="text-sm font-medium text-gray-600">Income</p>
                     <p className="text-2xl font-bold text-gray-900">
                       ${stats.totalRevenue}
                     </p>
@@ -299,7 +295,7 @@ export default function Dashboard() {
                 style={{ borderColor: colors.border.light }}
               >
                 <h3 className="text-lg font-medium text-gray-900">
-                  Actividad Reciente
+                  Recent Activity
                 </h3>
               </div>
               <div className="p-6">
@@ -384,10 +380,10 @@ export default function Dashboard() {
                     } as any
                   }
                 >
-                  <option value="ALL">Todos los tipos</option>
-                  <option value="DESK">Escritorio</option>
-                  <option value="OFFICE">Oficina</option>
-                  <option value="MEETING_ROOM">Sala de Reuniones</option>
+                  <option value="ALL">All</option>
+                  <option value="DESK">Desk</option>
+                  <option value="OFFICE">Office</option>
+                  <option value="MEETING_ROOM">Meeting room</option>
                   <option value="PHONE_BOOTH">Phone Booth</option>
                 </select>
               </div>
@@ -439,7 +435,7 @@ export default function Dashboard() {
                         className="px-3 py-1 text-sm font-medium text-white rounded-lg transition-colors"
                         style={{ backgroundColor: colors.brand.primary[600] }}
                       >
-                        Ver Detalles
+                        View Details
                       </button>
                     </div>
                   </div>
@@ -457,7 +453,7 @@ export default function Dashboard() {
               style={{ borderColor: colors.border.light }}
             >
               <h3 className="text-lg font-medium text-gray-900">
-                Mis Reservas
+                My Reservations
               </h3>
             </div>
             <div className="overflow-x-auto">
@@ -468,16 +464,16 @@ export default function Dashboard() {
                 <thead className="bg-gray-50">
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Espacio
+                      Espace
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Fecha
+                      Date
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Horario
+                      Schedule
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Estado
+                      State
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Total

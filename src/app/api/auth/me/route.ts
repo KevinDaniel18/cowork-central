@@ -7,10 +7,7 @@ export async function GET(request: NextRequest) {
     const token = request.cookies.get("auth-token")?.value;
 
     if (!token) {
-      return NextResponse.json(
-        { error: "Token no encontrado" },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: "Token not found" }, { status: 401 });
     }
 
     const decoded = await verifyToken(token);
@@ -28,10 +25,7 @@ export async function GET(request: NextRequest) {
     });
 
     if (!user) {
-      return NextResponse.json(
-        { error: "Usuario no encontrado" },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
     return NextResponse.json({
@@ -40,12 +34,12 @@ export async function GET(request: NextRequest) {
     });
   } catch (error) {
     if (error) {
-      return NextResponse.json({ error: "Token inválido" }, { status: 401 });
+      return NextResponse.json({ error: "Invalid token" }, { status: 401 });
     }
 
-    console.error("Error en /me", error);
+    console.error("Error /me", error);
     return NextResponse.json(
-      { error: "Error interno del servidor" },
+      { error: "Internal server error" },
       { status: 500 }
     );
   } finally {

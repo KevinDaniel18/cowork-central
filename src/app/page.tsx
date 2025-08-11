@@ -46,9 +46,9 @@ export default function LandingPage() {
           style={{ color: colors.brand.primary[600] }}
         />
       ),
-      title: "Reservas en Tiempo Real",
+      title: "Real-Time Reservations",
       description:
-        "Ve la disponibilidad actualizada al instante y reserva con un clic",
+        "See updated availability instantly and book with one click.",
     },
     {
       icon: (
@@ -57,9 +57,8 @@ export default function LandingPage() {
           style={{ color: colors.brand.secondary[600] }}
         />
       ),
-      title: "Pagos Seguros",
-      description:
-        "Procesa pagos de forma segura con encriptación de nivel bancario",
+      Title: "Secure Payments",
+      Description: "Process payments securely with bank-grade encryption",
     },
     {
       icon: (
@@ -68,9 +67,9 @@ export default function LandingPage() {
           style={{ color: colors.brand.accent[500] }}
         />
       ),
-      title: "Analytics Avanzados",
-      description:
-        "Dashboard completo con métricas y reportes para administradores",
+      Title: "Advanced Analytics",
+      Description:
+        "Complete dashboard with metrics and reports for administrators",
     },
     {
       icon: (
@@ -79,17 +78,17 @@ export default function LandingPage() {
           style={{ color: colors.brand.secondary[600] }}
         />
       ),
-      title: "Múltiples Ubicaciones",
-      description:
-        "Gestiona espacios en diferentes ubicaciones desde un solo panel",
+      Title: "Multiple Locations",
+      Description:
+        "Manage spaces in different locations from a single dashboard",
     },
   ];
 
   const spaceTypes = [
-    { name: "Escritorios", price: "Desde $15/hora", popular: false },
-    { name: "Oficinas Privadas", price: "Desde $45/hora", popular: true },
-    { name: "Salas de Reuniones", price: "Desde $30/hora", popular: false },
-    { name: "Phone Booths", price: "Desde $8/hora", popular: false },
+    { name: "Desks", price: "Starting at $15/hour", popular: false },
+    { name: "Private Offices", price: "Starting at $45/hour", popular: true },
+    { name: "Meeting Rooms", price: "Starting at $30/hour", popular: false },
+    { name: "Phone Booths", price: "Starting at $8/hour", popular: false },
   ];
 
   if (loading) {
@@ -128,20 +127,20 @@ export default function LandingPage() {
               className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6"
               style={{ color: colors.foreground.light }}
             >
-              Reserva tu espacio de{" "}
+              Reserve your space at{" "}
               <span
                 className="bg-clip-text text-transparent"
                 style={{ backgroundImage: colors.gradients.brand }}
               >
-                trabajo perfecto
+                perfect work
               </span>
             </h1>
             <p
               className="text-xl md:text-2xl mb-8 leading-relaxed"
               style={{ color: colors.neutral[600] }}
             >
-              Encuentra y reserva escritorios, oficinas y salas de reuniones en
-              tiempo real. La plataforma más moderna para espacios de coworking.
+              Find and book desks, offices, and meeting rooms in real time. The
+              most modern platform for coworking spaces.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -152,7 +151,7 @@ export default function LandingPage() {
                   color: "#ffffff",
                 }}
               >
-                Ver Espacios Disponibles
+                See Available Spaces
                 <ArrowRight className="ml-2 w-5 h-5" />
               </a>
               {!user && (
@@ -164,7 +163,7 @@ export default function LandingPage() {
                     color: colors.foreground.light,
                   }}
                 >
-                  Empezar Gratis
+                  Get Started for Free
                 </a>
               )}
             </div>
@@ -179,11 +178,11 @@ export default function LandingPage() {
               className="text-3xl md:text-4xl font-bold mb-4"
               style={{ color: colors.foreground.light }}
             >
-              ¿Por qué elegir CoWork Central?
+              Why choose CoWork Central?
             </h2>
             <p className="text-xl" style={{ color: colors.neutral[600] }}>
-              Una plataforma completa diseñada para hacer que la reserva de
-              espacios sea simple y eficiente.
+              A comprehensive platform designed to make booking spaces simple
+              and efficient.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -228,10 +227,10 @@ export default function LandingPage() {
               className="text-3xl md:text-4xl font-bold mb-4"
               style={{ color: colors.foreground.light }}
             >
-              Espacios para cada necesidad
+              Spaces for every need
             </h2>
             <p className="text-xl" style={{ color: colors.neutral[600] }}>
-              Desde escritorios individuales hasta salas de juntas completas
+              From individual desks to entire boardrooms
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -246,7 +245,7 @@ export default function LandingPage() {
                       className="text-white px-4 py-1 rounded-full text-sm font-semibold"
                       style={{ background: colors.gradients.brand }}
                     >
-                      Más Popular
+                      Most Popular
                     </span>
                   </div>
                 )}
@@ -272,21 +271,21 @@ export default function LandingPage() {
                         className="w-4 h-4 mr-2"
                         style={{ color: colors.brand.primary[500] }}
                       />
-                      WiFi incluido
+                      WiFi included
                     </div>
                     <div className="flex items-center justify-center">
                       <CheckCircle
                         className="w-4 h-4 mr-2"
                         style={{ color: colors.brand.primary[500] }}
                       />
-                      Cancelación flexible
+                      Flexible cancellation
                     </div>
                     <div className="flex items-center justify-center">
                       <CheckCircle
                         className="w-4 h-4 mr-2"
                         style={{ color: colors.brand.primary[500] }}
                       />
-                      Acceso 24/7
+                      24/7 access
                     </div>
                   </div>
                 </div>
@@ -310,7 +309,7 @@ export default function LandingPage() {
                 className="font-semibold"
                 style={{ color: colors.neutral[600] }}
               >
-                Espacios disponibles
+                Available spaces
               </div>
             </div>
             <div>
@@ -324,7 +323,7 @@ export default function LandingPage() {
                 className="font-semibold"
                 style={{ color: colors.neutral[600] }}
               >
-                Reservas completadas
+                Reservations completed
               </div>
             </div>
             <div>
@@ -338,7 +337,7 @@ export default function LandingPage() {
                 className="font-semibold"
                 style={{ color: colors.neutral[600] }}
               >
-                Satisfacción de clientes
+                Customer satisfaction
               </div>
             </div>
           </div>
@@ -353,11 +352,11 @@ export default function LandingPage() {
       >
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            ¿Listo para encontrar tu espacio ideal?
+            Ready to find your ideal space?
           </h2>
           <p className="text-xl mb-8" style={{ color: "#e6fffa" }}>
-            Únete a miles de profesionales que ya confían en CoWork Central para
-            sus necesidades de workspace.
+            Join thousands of professionals who already trust CoWork Central for
+            their workspace needs.
           </p>
           <a
             href={user ? "/dashboard" : "/auth/register"}
@@ -389,7 +388,7 @@ export default function LandingPage() {
               <span className="text-xl font-bold">CoWork Central</span>
             </div>
             <div className="text-gray-300 text-center">
-              © 2025 CoWork Central. Todos los derechos reservados.
+              © 2025 CoWork Central. All rights reserved.
             </div>
           </div>
         </div>

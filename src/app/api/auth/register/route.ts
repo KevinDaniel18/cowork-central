@@ -7,14 +7,14 @@ export async function POST(request: NextRequest) {
     const { name, email, password } = await request.json();
     if (!name || !email || !password) {
       return NextResponse.json(
-        { error: "Todos los campos son requeridos" },
+        { error: "All fields are required" },
         { status: 400 }
       );
     }
     if (password.length < 6) {
       return NextResponse.json(
         {
-          error: "La contraseña debe tener al menos 6 caracteres",
+          error: "The password must be at least 6 characters long.",
         },
         { status: 400 }
       );
@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
 
     if (existingUser) {
       return NextResponse.json(
-        { error: "El usuario ya existe con este email" },
+        { error: "The user already exists with this email" },
         { status: 409 }
       );
     }
@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
     const response = NextResponse.json({
       success: true,
       user,
-      message: "Usuario creado exitosamente",
+      message: "User created successfully",
     });
 
     response.cookies.set("auth-token", token, {
@@ -68,9 +68,9 @@ export async function POST(request: NextRequest) {
 
     return response;
   } catch (error) {
-    console.error("Error en registro:", error);
+    console.error("Error register:", error);
     return NextResponse.json(
-      { error: "Error interno del servidor" },
+      { error: "Internal server error" },
       { status: 500 }
     );
   } finally {

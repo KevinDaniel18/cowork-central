@@ -71,10 +71,10 @@ const defaultFilters: Filters = {
 };
 
 const typeOptions = [
-  { value: "ALL", label: "Todos los escritorios" },
-  { value: "DESK", label: "Escritorio" },
-  { value: "OFFICE", label: "Oficina Privada" },
-  { value: "MEETING_ROOM", label: "Sala de reuniones" },
+  { value: "ALL", label: "All" },
+  { value: "DESK", label: "Desk" },
+  { value: "OFFICE", label: "Office" },
+  { value: "MEETING_ROOM", label: "Meeting Room" },
   { value: "PHONE_BOOTH", label: "Phone Booth" },
 ];
 
@@ -114,11 +114,11 @@ export default function SpacesPage() {
         signal,
       });
       const data = res.data;
-      if (!data?.success) throw new Error("Error al cargar espacios");
+      if (!data?.success) throw new Error("Error loading spaces");
       setSpaces(data.spaces);
     } catch (error: any) {
       if (error.code === "ERR_CANCELED") return;
-      setError("No pudimos cargar los espacios");
+      setError("We couldn't load the spaces");
     } finally {
       setLoading(false);
     }
@@ -166,7 +166,7 @@ export default function SpacesPage() {
       });
 
       const data = res.data;
-      if (!data.success) throw new Error("No se pudo crear el espacio");
+      if (!data.success) throw new Error("The space could not be created");
       setCreateOpen(false);
       setForm({
         name: "",
@@ -179,7 +179,9 @@ export default function SpacesPage() {
       });
       fetchSpaces();
     } catch (error: any) {
-      setError(error?.response?.data?.error ?? "No se pudo crear el espacio");
+      setError(
+        error?.response?.data?.error ?? "The space could not be created"
+      );
     } finally {
       setCreating(false);
     }
@@ -200,11 +202,11 @@ export default function SpacesPage() {
                 className="text-3xl font-bold"
                 style={{ color: colors.foreground.light }}
               >
-                Catálogo de Espacios
+                Catalog of Spaces
               </h1>
               <p className="text-sm" style={{ color: colors.neutral[600] }}>
-                Explora escritorios, salas y oficinas privadas. Filtra por tipo
-                y capacidad
+                Explore desks, lounges, and private offices. Filter by type and
+                capacity
               </p>
             </div>
 
@@ -231,24 +233,24 @@ export default function SpacesPage() {
                     disabled={!adminMode}
                     title={
                       !adminMode
-                        ? "Activa Admin Mode para crear"
-                        : "Crear nuevo espacio"
+                        ? "Activate Admin Mode to create"
+                        : "Create new space"
                     }
                   >
-                    <Plus className="w-4 h-5" /> Nuevo espacio
+                    <Plus className="w-4 h-5" /> New space
                   </Button>
                 </DialogTrigger>
                 <DialogContent>
                   <DialogHeader>
-                    <DialogTitle>Crear espacio</DialogTitle>
+                    <DialogTitle>Create space</DialogTitle>
                     <DialogDescription>
-                      Completa los campos requeridos para crear un espacio
+                      Complete the required fields to create a space
                     </DialogDescription>
                   </DialogHeader>
 
                   <form onSubmit={onCreateSpace} className="grid gap-4">
                     <div className="grid gap-2">
-                      <Label className="grid gap-2">Nombre</Label>
+                      <Label className="grid gap-2">Name</Label>
                       <Input
                         id="name"
                         name="name"
@@ -259,7 +261,7 @@ export default function SpacesPage() {
                       />
                     </div>
                     <div className="grid gap-2">
-                      <Label>Tipo</Label>
+                      <Label>Type</Label>
                       <Select
                         value={form.type}
                         name="type"
@@ -282,7 +284,7 @@ export default function SpacesPage() {
 
                     <div className="grid grid-cols-2 gap-4">
                       <div className="grid gap-2">
-                        <Label htmlFor="capacity">Capacidad</Label>
+                        <Label htmlFor="capacity">Capacity</Label>
                         <Input
                           id="capacity"
                           name="capacity"
@@ -294,7 +296,7 @@ export default function SpacesPage() {
                         />
                       </div>
                       <div className="grid gap-2">
-                        <Label htmlFor="priceHour">Precio por hora (USD)</Label>
+                        <Label htmlFor="priceHour">Price per hour (USD)</Label>
                         <Input
                           id="priceHour"
                           name="priceHour"
@@ -310,7 +312,7 @@ export default function SpacesPage() {
 
                     <div className="grid gap-2">
                       <Label htmlFor="amenities">
-                        Amenities (separados por coma)
+                        Amenities (separated by coma)
                       </Label>
                       <Input
                         id="amenities"
@@ -322,7 +324,7 @@ export default function SpacesPage() {
                     </div>
 
                     <div className="grid gap-2">
-                      <Label htmlFor="imageUrl">Imagen (URL)</Label>
+                      <Label htmlFor="imageUrl">Image (URL)</Label>
                       <Input
                         id="imageUrl"
                         name="imageUrl"
@@ -333,13 +335,13 @@ export default function SpacesPage() {
                     </div>
 
                     <div className="grid gap-2">
-                      <Label htmlFor="description">Descripción</Label>
+                      <Label htmlFor="description">Description</Label>
                       <Input
                         id="description"
                         name="description"
                         value={form.description}
                         onChange={handleInput}
-                        placeholder="Breve descripción del espacio y recomendaciones de uso."
+                        placeholder="Brief description of the space and recommendations for use."
                       />
                     </div>
 
@@ -350,7 +352,7 @@ export default function SpacesPage() {
                         className="text-white"
                         style={{ backgroundColor: colors.brand.primary[600] }}
                       >
-                        {creating ? "Creando..." : "Crear espacio"}
+                        {creating ? "Creating..." : "Create space"}
                       </Button>
                     </div>
 
@@ -359,8 +361,8 @@ export default function SpacesPage() {
                         className="text-xs"
                         style={{ color: colors.neutral[600] }}
                       >
-                        Para crear debes activar Admin mode (envía un header
-                        x-admin en el POST)
+                        To create, you must activate Admin mode (send an x-admin
+                        header in the POST)
                       </p>
                     )}
                   </form>
@@ -374,19 +376,19 @@ export default function SpacesPage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="md:col-span-2">
               <Label htmlFor="q" className="sr-only">
-                Buscar
+                Search
               </Label>
               <SearchBar filters={filters} setFilters={setFilters} />
             </div>
 
             <div>
-              <Label className="sr-only">Tipo</Label>
+              <Label className="sr-only">Type</Label>
               <Select
                 value={filters.type}
                 onValueChange={(v) => setFilters((f) => ({ ...f, type: v }))}
               >
                 <SelectTrigger>
-                  <SelectValue placeholder="Tipo" />
+                  <SelectValue placeholder="Type" />
                 </SelectTrigger>
                 <SelectContent>
                   {typeOptions.map(({ label, value }) => (
@@ -402,7 +404,7 @@ export default function SpacesPage() {
               <Input
                 type="number"
                 min={0}
-                placeholder="Capacidad mínima"
+                placeholder="Minimum capacity"
                 value={filters.minCapacity}
                 onChange={(e) =>
                   setFilters((f) => ({ ...f, minCapacity: e.target.value }))
@@ -423,7 +425,7 @@ export default function SpacesPage() {
                   className="text-sm"
                   style={{ color: colors.neutral[700] }}
                 >
-                  Activos
+                  Active
                 </span>
               </label>
             </div>
@@ -473,7 +475,7 @@ export default function SpacesPage() {
                 style={{ color: colors.neutral[400] }}
               />
               <p className="text-sm" style={{ color: colors.neutral[600] }}>
-                No encontramos espacios con esos filtros
+                We did not find any spaces with those filters.
               </p>
             </div>
           ) : (
@@ -509,7 +511,7 @@ export default function SpacesPage() {
                             fontVariant="secondary"
                             className="bg-neutral-900/80 text-white"
                           >
-                            Inactivo
+                            Inactive
                           </Badge>
                         </div>
                       )}
@@ -533,7 +535,7 @@ export default function SpacesPage() {
                         style={{ color: colors.neutral[600] }}
                       >
                         <span className="inline-flex items-center gap-1">
-                          <Users className="w-4 h-4" /> {capacity} personas
+                          <Users className="w-4 h-4" /> {capacity} persons
                         </span>
                         <span className="inline-flex items-center gap-1">
                           <DollarSign className="w-4 h-4" />{" "}
@@ -541,7 +543,7 @@ export default function SpacesPage() {
                         </span>
                         <span className="inline-flex items-center gap-1">
                           <BadgePercent className="w-4 h-4" /> {totalBookings}{" "}
-                          reservas
+                          reserves
                         </span>
                       </div>
                     </CardHeader>
@@ -551,7 +553,7 @@ export default function SpacesPage() {
                         style={{ color: colors.neutral[700] }}
                       >
                         {description ||
-                          "Espacio disponible para tus necesidades de coworking."}
+                          "Space available for your coworking needs."}
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {amenities.slice(0, 5).map((a, i) => (
@@ -575,11 +577,11 @@ export default function SpacesPage() {
                           className="text-sm font-medium"
                           style={{ color: colors.brand.secondary[700] }}
                         >
-                          Reservar ahora
+                          Reserve now
                         </a>
                       ) : (
                         <span className="text-sm font-medium text-neutral-500">
-                          No disponible
+                          No available
                         </span>
                       )}
 
@@ -588,7 +590,7 @@ export default function SpacesPage() {
                         style={{ color: colors.neutral[600] }}
                       >
                         <MapPin className="w-4 h-4" />
-                        {isActive ? "Disponible" : "No disponible"}
+                        {isActive ? "Available" : "No Available"}
                       </span>
                     </CardFooter>
                   </Card>

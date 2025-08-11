@@ -10,10 +10,7 @@ export async function GET(
     const spaceId = parseInt(params.id);
 
     if (isNaN(spaceId)) {
-      return NextResponse.json(
-        { error: "ID de espacio inválido" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "ID invalid" }, { status: 400 });
     }
 
     const space = await prisma.space.findUnique({
@@ -84,7 +81,7 @@ export async function GET(
   } catch (error) {
     console.error("Error fetching space:", error);
     return NextResponse.json(
-      { error: "Error interno del servidor" },
+      { error: "Internal server error" },
       { status: 500 }
     );
   } finally {
@@ -102,13 +99,10 @@ export const PUT = requireAdminWithParams(
       const spaceId = parseInt(params.id);
 
       if (isNaN(spaceId)) {
-        return new Response(
-          JSON.stringify({ error: "ID de espacio inválido" }),
-          {
-            status: 400,
-            headers: { "Content-Type": "application/json" },
-          }
-        );
+        return new Response(JSON.stringify({ error: "ID invalid" }), {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        });
       }
 
       const {
@@ -127,13 +121,10 @@ export const PUT = requireAdminWithParams(
       });
 
       if (!existingSpace) {
-        return new Response(
-          JSON.stringify({ error: "Espacio no encontrado" }),
-          {
-            status: 404,
-            headers: { "Content-Type": "application/json" },
-          }
-        );
+        return new Response(JSON.stringify({ error: "Space not found" }), {
+          status: 404,
+          headers: { "Content-Type": "application/json" },
+        });
       }
 
       if (type) {
@@ -141,7 +132,7 @@ export const PUT = requireAdminWithParams(
         if (!validTypes.includes(type)) {
           return new Response(
             JSON.stringify({
-              error: `Tipo inválido. Debe ser uno de: ${validTypes.join(", ")}`,
+              error: `Invalid type. Must be one of: ${validTypes.join(", ")}`,
             }),
             {
               status: 400,
@@ -153,7 +144,7 @@ export const PUT = requireAdminWithParams(
 
       if (capacity !== undefined && capacity < 1) {
         return new Response(
-          JSON.stringify({ error: "Capacidad debe ser >= 1" }),
+          JSON.stringify({ error: "Capacity must be >= 1" }),
           {
             status: 400,
             headers: { "Content-Type": "application/json" },
@@ -162,7 +153,7 @@ export const PUT = requireAdminWithParams(
       }
 
       if (priceHour !== undefined && priceHour <= 0) {
-        return new Response(JSON.stringify({ error: "Precio debe ser > 0" }), {
+        return new Response(JSON.stringify({ error: "Price must be > 0" }), {
           status: 400,
           headers: { "Content-Type": "application/json" },
         });
@@ -203,7 +194,7 @@ export const PUT = requireAdminWithParams(
             ...updatedSpace,
             priceHour: parseFloat(updatedSpace.priceHour.toString()),
           },
-          message: "Espacio actualizado exitosamente",
+          message: "Space successfully updated",
         }),
         {
           status: 200,
@@ -235,13 +226,10 @@ export const DELETE = requireAdminWithParams(
       const spaceId = parseInt(params.id);
 
       if (isNaN(spaceId)) {
-        return new Response(
-          JSON.stringify({ error: "ID de espacio inválido" }),
-          {
-            status: 400,
-            headers: { "Content-Type": "application/json" },
-          }
-        );
+        return new Response(JSON.stringify({ error: "Invalid space ID" }), {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        });
       }
 
       const existingSpace = await prisma.space.findUnique({
@@ -265,20 +253,17 @@ export const DELETE = requireAdminWithParams(
       });
 
       if (!existingSpace) {
-        return new Response(
-          JSON.stringify({ error: "Espacio no encontrado" }),
-          {
-            status: 404,
-            headers: { "Content-Type": "application/json" },
-          }
-        );
+        return new Response(JSON.stringify({ error: "Space not found" }), {
+          status: 404,
+          headers: { "Content-Type": "application/json" },
+        });
       }
 
       if (existingSpace._count.bookings > 0) {
         return new Response(
           JSON.stringify({
             error:
-              "No se puede eliminar el espacio porque tiene reservas activas o futuras. Desactívalo en su lugar.",
+              "The space cannot be deleted because it has active or future reservations. Please deactivate it instead.",
           }),
           {
             status: 400,
@@ -294,7 +279,7 @@ export const DELETE = requireAdminWithParams(
       return new Response(
         JSON.stringify({
           success: true,
-          message: "Espacio eliminado exitosamente",
+          message: "Space successfully deleted",
         }),
         {
           status: 200,
