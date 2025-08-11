@@ -1,5 +1,0 @@
-src/generated/
-prisma/generated/
-**/generated/
-.next/
-out/
