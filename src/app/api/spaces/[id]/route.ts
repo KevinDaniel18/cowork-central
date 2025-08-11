@@ -2,16 +2,12 @@ import { prisma } from "@/constants/modules";
 import { requireAdminWithParams } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 
-type RouteParams = {
-  params: {
-    id: string;
-  };
-};
-
-export async function GET(request: NextRequest, { params }: RouteParams) {
-  const { id } = params;
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
-    const spaceId = parseInt(id);
+    const spaceId = parseInt((await params).id);
     if (isNaN(spaceId)) {
       return NextResponse.json({ error: "ID invalid" }, { status: 400 });
     }
@@ -93,10 +89,13 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
 }
 
 export const PUT = requireAdminWithParams(
-  async (request: NextRequest, user: any, { params }: RouteParams) => {
-    const { id } = params;
+  async (
+    request: NextRequest,
+    user: any,
+    { params }: { params: Promise<{ id: string }> }
+  ) => {
     try {
-      const spaceId = parseInt(id);
+      const spaceId = parseInt((await params).id);
       if (isNaN(spaceId)) {
         return new Response(JSON.stringify({ error: "ID invalid" }), {
           status: 400,
@@ -216,10 +215,13 @@ export const PUT = requireAdminWithParams(
 );
 
 export const DELETE = requireAdminWithParams(
-  async (request: NextRequest, user: any, { params }: RouteParams) => {
-    const { id } = params;
+  async (
+    request: NextRequest,
+    user: any,
+    { params }: { params: Promise<{ id: string }> }
+  ) => {
     try {
-      const spaceId = parseInt(id);
+      const spaceId = parseInt((await params).id);
 
       if (isNaN(spaceId)) {
         return new Response(JSON.stringify({ error: "Invalid space ID" }), {
