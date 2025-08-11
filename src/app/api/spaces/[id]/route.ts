@@ -210,13 +210,10 @@ export const PUT = requireAdminWithParams(
 );
 
 export const DELETE = requireAdminWithParams(
-  async (
-    request: NextRequest,
-    user,
-    { params }: { params: { id: string } }
-  ) => {
+  async (request: NextRequest, user: any, context: any) => {
+    const { id } = context.params;
     try {
-      const spaceId = parseInt(params.id);
+      const spaceId = parseInt(id);
 
       if (isNaN(spaceId)) {
         return new Response(JSON.stringify({ error: "Invalid space ID" }), {
