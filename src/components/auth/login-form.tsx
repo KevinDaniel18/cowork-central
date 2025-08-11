@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import axios from "axios";
+import axios, { isAxiosError } from "axios";
 import { Mail, Lock, Eye, EyeOff, LogIn } from "lucide-react";
 import { useNavigation } from "@/hooks/useNavigation";
 import { colors } from "@/constants/colors";
@@ -49,13 +49,14 @@ export function LoginForm() {
       } else {
         setError(result?.error ?? "Invalid credentials");
       }
-    } catch (error: any) {
+    } catch (error) {
       // console.log(error);
-
-      setError(
-        error?.response?.data?.error ??
-          "We couldn't log you in. Please try again."
-      );
+      if (isAxiosError(error)) {
+        setError(
+          error?.response?.data?.error ??
+            "We couldn't log you in. Please try again."
+        );
+      }
     } finally {
       setIsLoading(false);
     }
@@ -191,7 +192,9 @@ export function LoginForm() {
       </CardContent>
 
       <CardFooter className="flex justify-center text-sm">
-        <span className="text-muted-foreground">Don't have an account?</span>
+        <span className="text-muted-foreground">
+          Don&apos;t have an account?
+        </span>
         <Link
           href="/auth/register"
           className="ml-2 font-medium underline underline-offset-4"

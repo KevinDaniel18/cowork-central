@@ -29,7 +29,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { colors } from "@/constants/colors";
-import axios from "axios";
+import axios, { isAxiosError } from "axios";
 import {
   Badge,
   BadgePercent,
@@ -116,9 +116,11 @@ export default function SpacesPage() {
       const data = res.data;
       if (!data?.success) throw new Error("Error loading spaces");
       setSpaces(data.spaces);
-    } catch (error: any) {
-      if (error.code === "ERR_CANCELED") return;
-      setError("We couldn't load the spaces");
+    } catch (error) {
+      if (isAxiosError(error) && error.code === "ERR_CANCELED") {
+        return;
+      }
+      setError("We could not load the spaces");
     } finally {
       setLoading(false);
     }
@@ -178,10 +180,11 @@ export default function SpacesPage() {
         description: "",
       });
       fetchSpaces();
-    } catch (error: any) {
-      setError(
-        error?.response?.data?.error ?? "The space could not be created"
-      );
+    } catch (error) {
+      if (isAxiosError(error) && error.code === "ERR_CANCELED") {
+        return;
+      }
+      setError("We could not load the spaces");
     } finally {
       setCreating(false);
     }

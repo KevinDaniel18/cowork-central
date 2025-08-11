@@ -1,12 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, SetStateAction, Dispatch } from "react";
 import { Input } from "@/components/ui/input";
 
-export default function SearchBar({ filters, setFilters }: any) {
+type Filters = {
+  q: string;
+  type: string;
+  minCapacity: string;
+  activeOnly: boolean;
+};
+
+type SearchBarProps = {
+  filters: Filters;
+  setFilters: Dispatch<SetStateAction<Filters>>;
+};
+
+export default function SearchBar({ filters, setFilters }: SearchBarProps) {
   const [searchTerm, setSearchTerm] = useState(filters.q);
 
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
-      setFilters((f: any) => ({ ...f, q: searchTerm }));
+      setFilters((f) => ({ ...f, q: searchTerm }));
     }, 300);
 
     return () => clearTimeout(delayDebounce);

@@ -1,4 +1,4 @@
-import { prisma } from "@/constants/modules";
+import { Prisma, prisma } from "@/constants/modules";
 import { requireAdmin } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -10,14 +10,14 @@ export async function GET(request: NextRequest) {
     const minCapacity = searchParams.get("minCapacity");
     const q = searchParams.get("q")?.trim();
 
-    const where: any = {};
+    const where: Prisma.SpaceWhereInput = {};
 
     if (activeParam !== null) {
       where.isActive = activeParam === "true";
     }
 
     if (type) {
-      where.type = type;
+      where.type = type as "DESK" | "OFFICE" | "MEETING_ROOM" | "PHONE_BOOTH";
     }
 
     if (minCapacity) {

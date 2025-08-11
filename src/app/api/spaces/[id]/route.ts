@@ -2,6 +2,24 @@ import { prisma } from "@/constants/modules";
 import { requireAdminWithParams } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 
+type User = {
+  id: number;
+  email: string;
+  name: string;
+  role: string;
+};
+
+type SpaceUpdateData = {
+  name?: string;
+  type?: "DESK" | "OFFICE" | "MEETING_ROOM" | "PHONE_BOOTH";
+  capacity?: number;
+  priceHour?: number;
+  amenities?: string[];
+  imageUrl?: string;
+  description?: string;
+  isActive?: boolean;
+};
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -91,7 +109,7 @@ export async function GET(
 export const PUT = requireAdminWithParams(
   async (
     request: NextRequest,
-    user: any,
+    user: User,
     { params }: { params: Promise<{ id: string }> }
   ) => {
     try {
@@ -157,7 +175,7 @@ export const PUT = requireAdminWithParams(
         });
       }
 
-      const updateData: any = {};
+      const updateData: SpaceUpdateData = {};
       if (name !== undefined) updateData.name = name;
       if (type !== undefined) updateData.type = type;
       if (capacity !== undefined) updateData.capacity = parseInt(capacity);
@@ -217,7 +235,7 @@ export const PUT = requireAdminWithParams(
 export const DELETE = requireAdminWithParams(
   async (
     request: NextRequest,
-    user: any,
+    user: User,
     { params }: { params: Promise<{ id: string }> }
   ) => {
     try {

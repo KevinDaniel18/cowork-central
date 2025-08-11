@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, CSSProperties } from "react";
 import {
   Calendar,
   MapPin,
@@ -48,14 +48,23 @@ interface DashboardUser {
   createdAt: string;
 }
 
+type Colors = {
+  border: {
+    light: string;
+  };
+  ring: {
+    light: string;
+  };
+};
+
+type TabKey = "overview" | "spaces" | "bookings";
+
 export default function Dashboard() {
   const [user, setUser] = useState<DashboardUser | null>(null);
   const [spaces, setSpaces] = useState<Space[]>([]);
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<
-    "overview" | "spaces" | "bookings"
-  >("overview");
+  const [activeTab, setActiveTab] = useState<TabKey>("overview");
   const [searchTerm, setSearchTerm] = useState("");
   const [filterType, setFilterType] = useState("ALL");
 
@@ -176,7 +185,7 @@ export default function Dashboard() {
             ].map(({ key, label, icon: Icon }) => (
               <button
                 key={key}
-                onClick={() => setActiveTab(key as any)}
+                onClick={() => setActiveTab(key as TabKey)}
                 className={`flex items-center space-x-2 px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
                   activeTab === key
                     ? "text-white"
@@ -365,7 +374,7 @@ export default function Dashboard() {
                       {
                         borderColor: colors.border.light,
                         "--tw-ring-color": colors.ring.light,
-                      } as any
+                      } as CSSProperties & { "--tw-ring-color": string }
                     }
                   />
                 </div>
@@ -377,7 +386,7 @@ export default function Dashboard() {
                     {
                       borderColor: colors.border.light,
                       "--tw-ring-color": colors.ring.light,
-                    } as any
+                    } as CSSProperties & { "--tw-ring-color": string }
                   }
                 >
                   <option value="ALL">All</option>
