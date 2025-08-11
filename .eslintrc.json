@@ -1,8 +1,13 @@
 {
   "extends": ["next/core-web-vitals"],
+
   "ignorePatterns": [
     "src/generated/**/*",
     "prisma/generated/**/*",
     "**/generated/**/*"
-  ]
+  ],
+
+  "rules": {
+    "@typescript-eslint/no-require-imports": "off"
+  }
 }
