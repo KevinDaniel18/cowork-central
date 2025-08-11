@@ -1,0 +1,105 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+enum SpaceType {
+  DESK
+  OFFICE
+  MEETING_ROOM
+  PHONE_BOOTH
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  name      String
+  email     String    @unique
+  password  String
+  role      UserRole  @default(USER)
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  bookings  Booking[]
+
+  @@map("users")
+}
+
+model Space {
+  id          Int       @id @default(autoincrement())
+  name        String
+  type        SpaceType
+  capacity    Int
+  priceHour   Decimal   @map("price_hour") @db.Decimal(10, 2)
+  amenities   String[]
+  imageUrl    String?   @map("image_url")
+  description String?
+  isActive    Boolean   @default(true) @map("is_active")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  bookings    Booking[]
+
+  @@map("spaces")
+}
+
+model Booking {
+  id         Int           @id @default(autoincrement())
+  userId     Int           @map("user_id")
+  spaceId    Int           @map("space_id")
+  startTime  DateTime      @map("start_time")
+  endTime    DateTime      @map("end_time")
+  status     BookingStatus @default(PENDING)
+  totalPrice Decimal       @map("total_price") @db.Decimal(10, 2)
+  notes      String?
+  createdAt  DateTime      @default(now()) @map("created_at")
+  updatedAt  DateTime      @updatedAt @map("updated_at")
+  user       User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  space      Space         @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+  payment    Payment?
+
+  @@index([spaceId, startTime, endTime])
+  @@index([userId])
+  @@map("bookings")
+}
+
+model Payment {
+  id              Int           @id @default(autoincrement())
+  bookingId       Int           @unique @map("booking_id")
+  stripeSessionId String?       @map("stripe_session_id")
+  amount          Decimal       @db.Decimal(10, 2)
+  status          PaymentStatus @default(PENDING)
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+
+  booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  @@map("payments")
+}
