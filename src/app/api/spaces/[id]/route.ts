@@ -2,14 +2,14 @@ import { prisma } from "@/constants/modules";
 import { requireAdminWithParams } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 
-type RouteContext = {
+type RouteParams = {
   params: {
     id: string;
   };
 };
 
-export async function GET(request: NextRequest, context: RouteContext) {
-  const { id } = context.params;
+export async function GET(request: NextRequest, { params }: RouteParams) {
+  const { id } = params;
   try {
     const spaceId = parseInt(id);
     if (isNaN(spaceId)) {
@@ -93,8 +93,8 @@ export async function GET(request: NextRequest, context: RouteContext) {
 }
 
 export const PUT = requireAdminWithParams(
-  async (request: NextRequest, user: any, context: RouteContext) => {
-    const { id } = context.params;
+  async (request: NextRequest, user: any, { params }: RouteParams) => {
+    const { id } = params;
     try {
       const spaceId = parseInt(id);
       if (isNaN(spaceId)) {
@@ -216,8 +216,8 @@ export const PUT = requireAdminWithParams(
 );
 
 export const DELETE = requireAdminWithParams(
-  async (request: NextRequest, user: any, context: RouteContext) => {
-    const { id } = context.params;
+  async (request: NextRequest, user: any, { params }: RouteParams) => {
+    const { id } = params;
     try {
       const spaceId = parseInt(id);
 
