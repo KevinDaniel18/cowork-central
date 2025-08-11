@@ -1,13 +1,18 @@
 {
   "extends": ["next/core-web-vitals"],
-
   "ignorePatterns": [
     "src/generated/**/*",
     "prisma/generated/**/*",
     "**/generated/**/*"
   ],
-
-  "rules": {
-    "@typescript-eslint/no-require-imports": "off"
-  }
+  "overrides": [
+    {
+      "files": ["**/generated/**/*.js", "src/generated/**/*.js"],
+      "rules": {
+        "@typescript-eslint/no-require-imports": "off",
+        "import/no-commonjs": "off",
+        "@typescript-eslint/no-var-requires": "off"
+      }
+    }
+  ]
 }
